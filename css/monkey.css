@@ -1,0 +1,661 @@
+.game {
+    width: 750px;
+    height: 390px;
+    position: relative;
+}
+
+
+/* canvas 遊戲主畫面 */
+
+.monkey_cut {
+    width: 715px;
+    height: 310px;
+    position: absolute;
+    top: 66px;
+    left: 18px;
+    background: url(../images/bgImg.png) no-repeat 0 bottom;
+}
+
+#dom_overlay_container {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    display: block;
+}
+
+.result {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.result_cnt {
+    width: 390px;
+    height: 305px;
+    background-image: url(../images/result.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    animation: result 2s steps(1, start) forwards infinite;
+}
+
+@keyframes result {
+    0% {
+        background-position: 0px 0px;
+    }
+    9% {
+        background-position: 0px -305px;
+    }
+    18% {
+        background-position: 0px -610px;
+    }
+    27% {
+        background-position: 0px -915px;
+    }
+    36% {
+        background-position: 0px -1220px;
+    }
+    45% {
+        background-position: 0px -1525px;
+    }
+    54% {
+        background-position: 0px -1830px;
+    }
+    63% {
+        background-position: 0px -2135px;
+    }
+    72% {
+        background-position: 0px -2440px;
+    }
+    81% {
+        background-position: 0px -2745px;
+    }
+    90% {
+        background-position: 0px -3050px;
+    }
+    100% {
+        background-position: 0px -3355px;
+    }
+}
+
+.result_nb {
+    width: 100%;
+    position: absolute;
+    bottom: 63px;
+    left: 0;
+    color: #fff;
+    text-align: center;
+}
+
+.result_nb span {
+    color: #fff;
+}
+
+.result_gold,
+.result_silver {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 9px;
+    margin: auto;
+}
+
+.result_gold {
+    left: 0;
+    right: 109px;
+}
+
+.result_silver {
+    left: 109px;
+    right: 0;
+}
+
+.result_c1:before,
+.result_c2:before,
+.result_c3:before,
+.result_c4:before,
+.result_c5:before,
+.result_c6:before {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    border-radius: 50%;
+    color: #fff;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.result_c1:before {
+    content: '1';
+    background-color: #D10000;
+}
+
+.result_c2:before {
+    content: '2';
+    background-color: #FFAC00;
+}
+
+.result_c3:before {
+    content: '3';
+    background-color: #89C833;
+}
+
+.result_c4:before {
+    content: '4';
+    background-color: #4BC2E7;
+}
+
+.result_c5:before {
+    content: '5';
+    background-color: #1473E3;
+}
+
+.result_c6:before {
+    content: '6';
+    background-color: #A660BF;
+}
+
+.hasNone {
+    display: none;
+}
+
+
+/* 外框背景圖 */
+
+.game>img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/* 上方顯示標題 */
+
+.gameTitle {
+    width: 100%;
+    height: 65px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* 最新結果 */
+
+.newResult {
+    line-height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F7E5C6;
+}
+
+.newResult h5 {
+    font-weight: 600;
+}
+
+
+/* 上方頭像及時排列順序 */
+
+.ranking {
+    width: 384px;
+}
+
+.ranking ul {
+    display: flex;
+}
+
+.ranking li {
+    width: 62px;
+    height: 62px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rankImg_1 {
+    background-image: url(../images/rank_01.png);
+}
+
+.rankImg_2 {
+    background-image: url(../images/rank_02.png);
+}
+
+.rankImg_3 {
+    background-image: url(../images/rank_03.png);
+}
+
+.rankImg_4 {
+    background-image: url(../images/rank_04.png);
+}
+
+.rankImg_5 {
+    background-image: url(../images/rank_05.png);
+}
+
+.rankImg_6 {
+    background-image: url(../images/rank_06.png);
+}
+
+.tool {
+    display: flex;
+}
+
+
+/* 珠路圖按鈕 */
+
+.roadBtn {
+    width: 130px;
+    height: 42px;
+    margin-right: 5px;
+    padding-left: 15px;
+    line-height: 35px;
+    color: #F7E5C6;
+    background-color: #36281E;
+    border: 3px solid #765035;
+    border-radius: 42px;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.roadBtn::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 6px 6px 0 6px;
+    border-color: #F7E5C6 transparent transparent transparent;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 15px;
+    margin: auto;
+}
+
+.roadBtn.roadBtn-on {
+    border: 3px solid #FCC200;
+}
+
+.roadBtn.roadBtn-on::before {
+    border-width: 0 6px 6px 6px;
+    border-color: transparent transparent #FCC200 transparent;
+}
+
+
+/* 聲音按鈕 */
+
+.soundBtn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-image: url(../images/soundClose.png);
+    cursor: pointer;
+}
+.soundBtn.soundBtn-on{
+    background-image: url(../images/soundOpen.png);
+}
+
+
+
+/* 珠路圖 */
+
+.roadMap {
+    width: 714px;
+    height: 278px;
+    border-bottom: 3px solid #c7b69c;
+    background-color: #e3d7bc;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    user-select: none;
+}
+
+.roadMap_top {
+    margin-top: 10px;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.roadMap_switch {
+    width: 125px;
+    height: 30px;
+    text-align: center;
+    border-radius: 15px;
+    background-color: #64422a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.roadMap_switch button {
+    width: 58px;
+    height: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 24px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: #e3d7bc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.roadMap_switch button.switch_on {
+    background-color: #FCC200;
+    color: #64422a;
+}
+
+.roadMap_tab {
+    display: flex;
+}
+
+.roadMap_tab button {
+    height: 30px;
+    border-radius: 30px;
+    padding: 0 19px;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #64422a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.roadMap_tab button+button {
+    margin-left: 5px;
+}
+
+.roadMap_tab button.tab_on,
+.roadMap_tab button:hover {
+    border: 1px solid #64422a;
+    background-color: #F4EED9;
+}
+
+.roadMap_close {
+    width: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+
+.closeBtn {
+    width: 30px;
+    height: 30px;
+    background-color: #64422a;
+    border-radius: 50%;
+    position: relative;
+}
+
+.closeBtn::before,
+.closeBtn::after {
+    width: 2px;
+    height: 15px;
+    content: '';
+    background-color: #f1f2cd;
+    margin: auto;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.closeBtn::before {
+    transform: rotate(-45deg);
+}
+
+.closeBtn::after {
+    transform: rotate(45deg);
+}
+
+
+/* 冠軍、大小、單雙珠路圖表  */
+
+.roadMap_items {
+    width: 685px;
+    min-height: 33.9px;
+    max-height: 198.7px;
+    margin: 20px auto;
+    border-left: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+    overflow-y: scroll;
+}
+
+.roadMap_items::-webkit-scrollbar {
+    width: 0;
+}
+
+.roadColor_r {
+    color: #d10000;
+}
+
+.roadColor_y {
+    color: #ffac00;
+}
+
+.roadColor_g {
+    color: #63c109;
+}
+
+.roadColor_c {
+    color: #4bc2e7;
+}
+
+.roadColor_b {
+    color: #1473e3;
+}
+
+.roadColor_p {
+    color: #a660bf;
+}
+
+.roadItem {
+    width: 100%;
+    display: flex;
+    background: #F4EED9 url(../images/table-s.svg) top left / 38px 33px;
+}
+
+.roadItem>div {
+    width: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.roadItem span {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin: 1px 0 2px;
+    border-radius: 50%;
+}
+
+
+/* 購買分佈圖表 */
+
+.buyMap {
+    margin: 20px auto;
+}
+
+.buyMap ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.buyMap li {
+    width: 50%;
+    padding: 0 10px 8px;
+    display: flex;
+}
+
+.buyMap li:nth-child(odd) {
+    justify-content: flex-end;
+}
+
+.buyItem {
+    width: 312px;
+    height: 56px;
+    padding: 0 8px;
+    border-radius: 15px;
+    background-color: #36281e;
+    display: flex;
+    align-items: center;
+}
+
+.buyAvatar {
+    width: 48px;
+    flex-shrink: 0;
+    margin-right: 8px;
+}
+
+.buyAvatar>img {
+    width: 100%;
+    vertical-align: middle;
+}
+
+.buyBar {
+    width: calc(100% - 50px);
+    height: 45px;
+    background-color: #483223;
+    border-radius: 0 10px 10px 0;
+    position: relative;
+}
+
+.progress {
+    width: 50%;
+    height: 100%;
+    border-radius: 0 10px 10px 0;
+    position: absolute;
+}
+
+.buyMap li:nth-child(1) .progress {
+    background-color: #d10000;
+}
+
+.buyMap li:nth-child(2) .progress {
+    background-color: #ffac00;
+}
+
+.buyMap li:nth-child(3) .progress {
+    background-color: #63c109;
+}
+
+.buyMap li:nth-child(4) .progress {
+    background-color: #4bc2e7;
+}
+
+.buyMap li:nth-child(5) .progress {
+    background-color: #1473e3;
+}
+
+.buyMap li:nth-child(6) .progress {
+    background-color: #a660bf;
+}
+
+.ratio {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.ratio::after {
+    content: '%';
+    padding-left: 5px;
+}
+
+
+/* ========== 測試區域 ========== */
+
+body {
+    padding: 20px;
+}
+
+.showTest>div {
+    margin: 5px 0;
+}
+
+.showTest p {
+    height: 25px;
+}
+
+.showTest tt {
+    margin-right: 5px;
+}
+
+.showNb {
+    width: 50px;
+    text-align: center;
+}
+
+.showTest span {
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    align-items: center;
+}
+
+.showTest>div:last-child {
+    display: flex;
+}
+
+.showTest>div:last-child input {
+    margin-right: 5px;
+}
+
+.headTest {
+    padding: 10px 0;
+    display: flex;
+}
+
+.headTest>li {
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.headTest>li+li {
+    margin-left: 5px;
+}

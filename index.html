@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Shortcut Icon" type="image/x-icon" href="images/trafficLight_green.png">
+    <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js'></script>
+    <script src="script/monkey.js"></script>
+    <script src="script/action.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/monkey.css">
+    <title>Monkey climb tree</title>
+</head>
+
+<body onload="init();">
+
+    <div class="game">
+        <!-- canvas 遊戲主畫面 -->
+        <div id="animation_container" class="monkey_cut">
+            <canvas id="canvas"></canvas>
+            <div id="dom_overlay_container"></div>
+
+            <div class="result hasNone" id="result">
+                <div class="result_cnt">
+                    <p class="result_nb">No.<span id="result_01">2020</span><span id="result_02">0515</span><span id="result_03">1403</span></p>
+                </div>
+                <div class="result_gold" id="result_gold"></div>
+                <div class="result_silver" id="result_silver"></div>
+            </div>
+        </div>
+
+
+        <!-- 外框背景圖 -->
+        <img src="images/borderBg.png">
+
+        <!-- 上方顯示標題 -->
+        <div class="gameTitle">
+            <!-- 最新結果 -->
+            <div class="newResult">
+                <h5>最新結果</h5>
+                <p><span id="newResul_01">2020</span><span id="newResul_02">0515</span><span id="newResul_02">1403</span></p>
+            </div>
+
+            <!-- 上方頭像及時排列順序 -->
+            <div class="ranking">
+                <ul>
+                    <li class="rankImg_1" id="rank_1"></li>
+                    <li class="rankImg_2" id="rank_2"></li>
+                    <li class="rankImg_3" id="rank_3"></li>
+                    <li class="rankImg_4" id="rank_4"></li>
+                    <li class="rankImg_5" id="rank_5"></li>
+                    <li class="rankImg_6" id="rank_6"></li>
+                </ul>
+            </div>
+
+            <!-- 上方工具列 -->
+            <div class="tool">
+                <!-- 珠路圖按鈕 -->
+                <div class="roadBtn" id="roadBtn">開獎統計</div>
+                <!-- 聲音按鈕 -->
+                <div class="soundBtn" id="soundBtn"></div>
+            </div>
+           
+
+            <!-- 珠路圖 -->
+            <div class="roadMap hasNone" id="roadMap">
+                <div class="roadMap_top">
+                    <div class="roadMap_switch" id="roadMap_switch">
+                        <button class="switch_on">冠軍</button>
+                        <button>亞軍</button>
+                    </div>
+
+                    <div class="roadMap_tab" id="roadMap_tab">
+                        <button class="tab_on">冠軍</button>
+                        <button>大小</button>
+                        <button>單雙</button>
+                        <button>購買分佈</button>
+                    </div>
+
+                    <div class="roadMap_close" id="roadMap_close">
+                        <div class="closeBtn"></div>
+                    </div>
+                </div>
+
+
+                <!-- 冠軍、大小、單雙珠路圖表 -->
+                <div class="roadMap_items" id="roadMap_items">
+                    <div class="roadItem" id="roadItem">
+
+                <!-- 
+                        <span class=" ? "></span>
+                        roadColor_r  ==> 1,大,雙
+                        roadColor_b  ==> 5,小,單
+                        roadColor_y  ==> 2 
+                        roadColor_g  ==> 3
+                        roadColor_c  ==> 4 
+                        roadColor_p  ==> 6
+
+                    Dom架構 :
+                        <div>
+                            <span></span>
+                            <span></span>
+                        </div> 
+                -->
+                    </div>
+                </div>
+
+                <!-- 購買分佈圖表 -->
+                <div class="buyMap hasNone" id="buyMap">
+                    <ul>
+                        <li>
+                            <div class="buyItem">
+                                <div class="buyAvatar">
+                                    <img src="images/rank_01.png">
+                                </div>
+                                <div class="buyBar">
+                                    <span class="progress"></span>
+                                    <span class="ratio">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="buyItem">
+                                <div class="buyAvatar">
+                                    <img src="images/rank_02.png">
+                                </div>
+                                <div class="buyBar">
+                                    <span class="progress"></span>
+                                    <span class="ratio">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="buyItem">
+                                <div class="buyAvatar">
+                                    <img src="images/rank_03.png">
+                                </div>
+                                <div class="buyBar">
+                                    <span class="progress"></span>
+                                    <span class="ratio">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="buyItem">
+                                <div class="buyAvatar">
+                                    <img src="images/rank_04.png">
+                                </div>
+                                <div class="buyBar">
+                                    <span class="progress"></span>
+                                    <span class="ratio">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="buyItem">
+                                <div class="buyAvatar">
+                                    <img src="images/rank_05.png">
+                                </div>
+                                <div class="buyBar">
+                                    <span class="progress"></span>
+                                    <span class="ratio">0</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="buyItem">
+                                <div class="buyAvatar">
+                                    <img src="images/rank_06.png">
+                                </div>
+                                <div class="buyBar">
+                                    <span class="progress"></span>
+                                    <span class="ratio">0</span>
+                                </div>
+                            </div>
+                        </li>                
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- ========== 測試區域 ========== -->
+
+    <div class="showTest">
+        <ul class="headTest">
+            <li class="ht01">1</li>
+            <li class="ht02">2</li>
+            <li class="ht03">3</li>
+            <li class="ht04">4</li>
+            <li class="ht05">5</li>
+            <li class="ht06">6</li>
+        </ul>
+        <div>
+            <p>第1名 : <tt id="show1">--</tt>號</p>
+            <p>第2名 : <tt id="show2">--</tt>號</p>
+        </div>
+        <div>
+            <button id="btn1">跳舞</button>
+        </div>
+        <div>
+            <input type="tel" class="showNb" id="nb1" maxlength="1" placeholder="第1名">
+            <input type="tel" class="showNb" id="nb2" maxlength="1" placeholder="第2名">
+            <button id="btn2">爬樹</button>
+            <span>自訂賽果請輸入號碼 1 ~ 6號(若無則為隨機)</span>
+        </div>
+    </div>
+
+
+    <script src="script/test.js"></script>
+</body>
+
+</html>
